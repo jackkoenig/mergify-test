@@ -1,0 +1,29 @@
+pull_request_rules:
+  - name: automatic squash-and-merge on label
+    conditions:
+      - base=master
+      - label="Please Squash-and-Merge"
+      - label!="DO NOT MERGE"
+    actions:
+      merge:
+        method: squash
+        strict: smart
+        strict_method: merge
+
+  - name: automatic merge on label
+    conditions:
+      - base=master
+      - label="Please Merge"
+      - label!="DO NOT MERGE"
+    actions:
+      merge:
+        method: merge
+
+  - name: backport patches to 0.1.x
+    conditions:
+      - base=master
+      - label=backport-to-0.1.x
+    actions:
+      backport:
+        branches:
+          - 0.1.x
