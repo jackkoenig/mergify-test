@@ -27,3 +27,11 @@ pull_request_rules:
       backport:
         branches:
           - 0.1.x
+
+  - name: label Mergify backport PR
+    conditions:
+      - base=0.1.x
+      - body~="This is an automated backport of pull request"
+    actions:
+      label:
+        add: Backport
